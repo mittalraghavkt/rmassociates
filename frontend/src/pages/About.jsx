@@ -157,11 +157,16 @@ const About = () => {
               <CardContent className="p-8">
                 <div className="grid md:grid-cols-3 gap-8 items-center">
                   <div className="md:col-span-1">
-                    <img
-                      src="https://images.pexels.com/photos/8297150/pexels-photo-8297150.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                      alt="CA Raghav Mittal"
-                      className="rounded-xl shadow-lg w-full"
-                    />
+                    <div className="founder-image-wrapper aspect-square shadow-xl">
+                      <img
+                        src="/images/founder.jpeg"
+                        alt="CA Raghav Mittal"
+                        className="w-full h-full object-cover relative z-0"
+                        style={{
+                          background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)',
+                        }}
+                      />
+                    </div>
                   </div>
                   <div className="md:col-span-2 space-y-4">
                     <div>

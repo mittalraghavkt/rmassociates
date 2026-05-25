@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { useToast } from '../hooks/use-toast';
+import { api, formatApiErrorDetail } from '../lib/api';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -15,18 +16,30 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toast({
-      title: 'Message Sent Successfully!',
-      description: 'We will get back to you within 24 hours.',
-    });
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setSubmitting(true);
+    try {
+      const { data } = await api.post('/contact', formData);
+      toast({
+        title: 'Message Sent Successfully!',
+        description: data.message || 'We will get back to you within 24 hours.',
+      });
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    } catch (err) {
+      toast({
+        title: 'Could not send message',
+        description: formatApiErrorDetail(err.response?.data?.detail) || 'Please try again.',
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -201,8 +214,9 @@ const Contact = () => {
                       className="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold"
                       size="lg"
                       data-testid="contact-form-submit"
+                      disabled={submitting}
                     >
-                      Send Message
+                      {submitting ? 'Sending...' : 'Send Message'}
                       <Send className="ml-2 w-4 h-4" />
                     </Button>
                   </form>
