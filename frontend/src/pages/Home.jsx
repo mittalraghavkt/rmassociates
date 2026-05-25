@@ -77,11 +77,17 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <Reveal>
-              <img
-                src="https://images.pexels.com/photos/7654122/pexels-photo-7654122.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt="About Raghav Mittal & Associates"
-                className="rounded-2xl shadow-xl"
-              />
+              <div className="relative">
+                <img
+                  src="https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=600&q=70"
+                  alt="Financial documents and calculator"
+                  className="rounded-xl shadow-lg w-full max-w-sm mx-auto"
+                />
+                <div className="absolute -bottom-4 -right-4 bg-green-600 text-white rounded-xl px-4 py-3 shadow-lg">
+                  <div className="text-xs uppercase tracking-wider">ICAI</div>
+                  <div className="text-sm font-bold">Qualified</div>
+                </div>
+              </div>
             </Reveal>
             <Reveal delay={150}>
               <div className="space-y-6">

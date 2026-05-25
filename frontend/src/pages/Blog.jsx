@@ -228,7 +228,7 @@ const Blog = () => {
             Get in touch for personalized tax updates and financial insights.
           </p>
           <Link to="/contact">
-            <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold px-8 shadow-xl">
+            <Button size="lg" className="bg-white text-blue-900 hover:bg-green-50 hover:text-green-800 font-semibold px-8 shadow-xl transition-all duration-300">
               Contact Us
             </Button>
           </Link>

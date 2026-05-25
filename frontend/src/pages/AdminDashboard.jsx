@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 import { useAuth } from '../contexts/AuthContext';
 import { api, formatApiErrorDetail } from '../lib/api';
 import { Button } from '../components/ui/button';
@@ -7,6 +9,23 @@ import { Textarea } from '../components/ui/textarea';
 import { Card, CardContent } from '../components/ui/card';
 import { useToast } from '../hooks/use-toast';
 import { LogOut, Plus, Pencil, Trash2, FileText, Inbox, X } from 'lucide-react';
+
+const quillModules = {
+  toolbar: [
+    [{ header: [1, 2, 3, false] }],
+    ['bold', 'italic', 'underline'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    ['link'],
+    ['clean'],
+  ],
+};
+
+const quillFormats = [
+  'header',
+  'bold', 'italic', 'underline',
+  'list',
+  'link',
+];
 
 const CATEGORIES = [
   'GST & Taxation',
@@ -420,16 +439,19 @@ const AdminDashboard = () => {
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-1">
-                    Content (HTML supported)
+                    Content (rich text editor)
                   </label>
-                  <Textarea
-                    value={form.content}
-                    onChange={(e) => setForm({ ...form, content: e.target.value })}
-                    rows={10}
-                    required
-                    data-testid="form-content"
-                    className="font-mono text-sm"
-                  />
+                  <div className="quill-wrapper">
+                    <ReactQuill
+                      theme="snow"
+                      value={form.content}
+                      onChange={(value) => setForm({ ...form, content: value })}
+                      modules={quillModules}
+                      formats={quillFormats}
+                      placeholder="Write your blog content..."
+                      data-testid="form-content"
+                    />
+                  </div>
                 </div>
                 <div className="flex justify-end gap-2 pt-2">
                   <Button type="button" variant="outline" onClick={() => setShowForm(false)}>

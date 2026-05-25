@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './components/ScrollToTop';
 import { Toaster } from './components/ui/sonner';
 import { AuthProvider } from './contexts/AuthContext';
 import Home from './pages/Home';
@@ -22,6 +23,7 @@ const PublicLayout = ({ children }) => (
     <Header />
     {children}
     <Footer />
+    <ScrollToTop />
   </>
 );
 

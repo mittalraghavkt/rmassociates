@@ -9,7 +9,14 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      const y = window.scrollY;
+      // Hysteresis: only flip state when crossing distinct thresholds.
+      // This prevents jitter near the boundary.
+      setIsScrolled((prev) => {
+        if (prev && y < 30) return false;
+        if (!prev && y > 110) return true;
+        return prev;
+      });
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -81,6 +88,7 @@ const Header = () => {
               <img
                 src="/images/ca-india-logo.png"
                 alt="CA India Logo"
+                className="logo-img"
                 style={{
                   width: isScrolled ? '46px' : '64px',
                   height: isScrolled ? '46px' : '64px',

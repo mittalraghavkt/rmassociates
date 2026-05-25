@@ -289,23 +289,25 @@ const Contact = () => {
       {/* Direct Contact CTA */}
       <section className="py-20 bg-blue-900 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Prefer a Direct Consultation?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Get in touch with us directly to discuss your financial requirements.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:9521452288" data-testid="call-now-btn">
-              <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold px-8 shadow-xl">
-                <Phone className="mr-2 w-5 h-5" />
-                Call Now
-              </Button>
-            </a>
-            <a href="https://wa.me/919521452288" target="_blank" rel="noopener noreferrer" data-testid="whatsapp-cta-btn">
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-semibold px-8">
-                WhatsApp Us
-              </Button>
-            </a>
-          </div>
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Prefer a Direct Consultation?</h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              Get in touch with us directly to discuss your financial requirements.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="tel:9521452288" data-testid="call-now-btn">
+                <Button size="lg" className="bg-white text-blue-900 hover:bg-green-50 hover:text-green-800 font-semibold px-8 shadow-xl transition-all duration-300">
+                  <Phone className="mr-2 w-5 h-5" />
+                  Call Now
+                </Button>
+              </a>
+              <a href="https://wa.me/919521452288" target="_blank" rel="noopener noreferrer" data-testid="whatsapp-cta-btn">
+                <Button size="lg" variant="outline" className="border-2 border-green-400 text-green-200 hover:bg-green-600 hover:text-white hover:border-green-400 font-semibold px-8 transition-all duration-300">
+                  WhatsApp Us
+                </Button>
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
     </div>

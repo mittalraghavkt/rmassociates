@@ -79,11 +79,17 @@ const About = () => {
               </div>
             </Reveal>
             <Reveal delay={150}>
-              <img
-                src="https://images.pexels.com/photos/7654132/pexels-photo-7654132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt="Our Team"
-                className="rounded-2xl shadow-xl"
-              />
+              <div className="relative">
+                <img
+                  src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=70"
+                  alt="Financial planning and analysis"
+                  className="rounded-xl shadow-lg w-full max-w-sm mx-auto"
+                />
+                <div className="absolute -bottom-4 -left-4 bg-blue-900 text-white rounded-xl px-4 py-3 shadow-lg">
+                  <div className="text-xs uppercase tracking-wider text-green-300">Founded</div>
+                  <div className="text-sm font-bold">2025</div>
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -169,11 +175,13 @@ const About = () => {
                 <CardContent className="p-8">
                   <div className="grid md:grid-cols-3 gap-8 items-center">
                     <div className="md:col-span-1">
-                      <div className="founder-image-wrapper aspect-square">
-                        <img
-                          src="/images/founder.jpeg"
-                          alt="CA Raghav Mittal"
-                        />
+                      <div className="founder-image-frame aspect-[4/5]">
+                        <div className="inner h-full">
+                          <img
+                            src="/images/founder.jpeg"
+                            alt="CA Raghav Mittal"
+                          />
+                        </div>
                       </div>
                     </div>
                     <div className="md:col-span-2 space-y-4">
