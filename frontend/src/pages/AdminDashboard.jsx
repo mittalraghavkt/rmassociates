@@ -70,9 +70,7 @@ const AdminDashboard = () => {
       const { data } = await api.post('/admin/upload', fd, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      const fullUrl = data.url.startsWith('http')
-        ? data.url
-        : `${process.env.REACT_APP_BACKEND_URL}${data.url}`;
+      const fullUrl = data.url; // already a relative path like /api/uploads/...
       setForm((prev) => ({ ...prev, image: fullUrl }));
       toast({ title: 'Image uploaded' });
     } catch (err) {

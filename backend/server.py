@@ -250,7 +250,14 @@ async def get_me(current_user: dict = Depends(get_current_user)):
 # ---------------------------------------------------------------------------
 
 @api_router.get("/blog")
-async def list_blog_posts(category: Optional[str] = None, search: Optional[str] = None):
+async def list_blog_posts(
+    category: Optional[str] = None,
+    search: Optional[str] = None,
+    limit: int = 50,
+    skip: int = 0,
+):
+    limit = max(1, min(limit, 100))
+    skip = max(0, skip)
     query = {}
     if category and category != "All":
         query["category"] = category
@@ -259,7 +266,12 @@ async def list_blog_posts(category: Optional[str] = None, search: Optional[str] 
             {"title": {"$regex": re.escape(search), "$options": "i"}},
             {"excerpt": {"$regex": re.escape(search), "$options": "i"}},
         ]
-    cursor = db.blog_posts.find(query).sort("published_at", -1)
+    projection = {
+        "title": 1, "slug": 1, "excerpt": 1, "content": 1,
+        "category": 1, "image": 1, "author": 1,
+        "read_time": 1, "published_at": 1,
+    }
+    cursor = db.blog_posts.find(query, projection).sort("published_at", -1).skip(skip).limit(limit)
     posts = [serialize_blog(p) async for p in cursor]
     return posts
 
@@ -396,8 +408,14 @@ async def submit_contact(payload: ContactSubmissionCreate):
 
 
 @api_router.get("/admin/contacts")
-async def list_contacts(current_user: dict = Depends(get_current_user)):
-    cursor = db.contact_submissions.find({}).sort("submitted_at", -1)
+async def list_contacts(
+    current_user: dict = Depends(get_current_user),
+    limit: int = 100,
+    skip: int = 0,
+):
+    limit = max(1, min(limit, 200))
+    skip = max(0, skip)
+    cursor = db.contact_submissions.find({}).sort("submitted_at", -1).skip(skip).limit(limit)
     contacts = [serialize_contact(c) async for c in cursor]
     return contacts
 
