@@ -45,10 +45,8 @@ const Blog = () => {
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-green-600/30 text-green-100 px-4 py-2 rounded-full text-sm font-semibold border border-green-300/30 mb-6">
-              Insights &amp; Updates
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <span className="section-badge-dark mb-6 inline-block">Insights &amp; Updates</span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-4" style={{ fontFamily: "'Playfair Display', serif" }}>
               Tax &amp; Financial Advisory Blog
             </h1>
             <p className="text-xl text-blue-100" style={{ fontFamily: "'Cormorant Garamond', serif" }}>

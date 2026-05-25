@@ -20,13 +20,11 @@ const Footer = () => {
   ];
 
   const CALogo = () => (
-    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-blue-300 shadow-sm">
-      <div className="text-center leading-none">
-        <div className="text-blue-900 font-bold text-xs tracking-tight">CA</div>
-        <div className="w-7 h-0.5 bg-blue-700 mx-auto my-0.5"></div>
-        <div className="text-blue-700 font-semibold" style={{ fontSize: '6px', letterSpacing: '0.5px' }}>ICAI</div>
-      </div>
-    </div>
+    <img
+      src="/images/ca-india-logo.png"
+      alt="CA India Logo"
+      className="w-12 h-12 object-contain bg-white rounded-lg p-1"
+    />
   );
 
   return (
@@ -56,7 +54,7 @@ const Footer = () => {
                   <Link
                     to={link.path}
                     data-testid={`footer-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="text-blue-200 hover:text-white transition-colors text-sm"
+                    className="text-blue-200 hover:text-green-300 transition-colors duration-300 text-sm link-underline"
                   >
                     {link.name}
                   </Link>
@@ -73,7 +71,7 @@ const Footer = () => {
                 <li key={index}>
                   <Link
                     to={service.path}
-                    className="text-blue-200 hover:text-white transition-colors text-sm"
+                    className="text-blue-200 hover:text-green-300 transition-colors duration-300 text-sm link-underline"
                   >
                     {service.name}
                   </Link>

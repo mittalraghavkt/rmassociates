@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calculator, FileText, BarChart3, Building2, TrendingUp, CheckCircle, Shield, Briefcase, Users, BookOpen, DollarSign, Receipt } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
+import { Reveal } from '../hooks/useScrollReveal';
 
 const Services = () => {
   const services = [
@@ -84,10 +85,8 @@ const Services = () => {
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
-              Our Services
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="section-badge-dark mb-6 inline-block">Our Services</span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-4">
               Comprehensive Financial & Compliance Solutions
             </h1>
             <p className="text-xl text-blue-100">
@@ -104,26 +103,28 @@ const Services = () => {
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <Card key={index} className="border border-blue-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group bg-white" data-testid={`service-card-${index}`}>
-                  <CardContent className="p-6 space-y-4">
-                    <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-800 rounded-lg border border-blue-200 group-hover:bg-blue-100 transition-colors">
-                      <Icon className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-xl font-bold text-blue-900">{service.title}</h3>
-                    <p className="text-gray-600">{service.description}</p>
-                    <div className="pt-2">
-                      <h4 className="font-semibold text-blue-900 mb-2 text-sm">Key Services:</h4>
-                      <ul className="space-y-1.5">
-                        {service.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
-                            <span className="text-blue-700 mt-0.5">•</span>
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
+                <Reveal key={index} delay={(index % 3) * 100}>
+                  <Card className="card-hover shadow-sm bg-white group h-full" data-testid={`service-card-${index}`}>
+                    <CardContent className="p-6 space-y-4">
+                      <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-800 rounded-lg border border-blue-200 group-hover:bg-green-50 group-hover:text-green-700 group-hover:border-green-300 transition-all duration-300">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-xl font-bold text-blue-900">{service.title}</h3>
+                      <p className="text-gray-600">{service.description}</p>
+                      <div className="pt-2">
+                        <h4 className="font-semibold text-blue-900 mb-2 text-sm">Key Services:</h4>
+                        <ul className="space-y-1.5">
+                          {service.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                              <span className="text-green-600 mt-0.5">•</span>
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Reveal>
               );
             })}
           </div>

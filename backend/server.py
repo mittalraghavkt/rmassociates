@@ -8,13 +8,15 @@ import os
 import logging
 import uuid
 import re
+import shutil
 import bcrypt
 import jwt
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional, Annotated
 from bson import ObjectId
 
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request, Response, status
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request, Response, status, UploadFile, File
+from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field, ConfigDict, EmailStr, BeforeValidator
@@ -349,6 +351,37 @@ async def delete_blog_post(
 
 
 # ---------------------------------------------------------------------------
+# Image Upload (admin only)
+# ---------------------------------------------------------------------------
+
+UPLOAD_DIR = ROOT_DIR / "uploads"
+UPLOAD_DIR.mkdir(exist_ok=True)
+
+ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"}
+MAX_UPLOAD_SIZE = 8 * 1024 * 1024  # 8 MB
+
+
+@api_router.post("/admin/upload")
+async def upload_image(
+    file: UploadFile = File(...),
+    current_user: dict = Depends(get_current_user),
+):
+    if file.content_type not in ALLOWED_IMAGE_TYPES:
+        raise HTTPException(status_code=400, detail="Unsupported file type. Use JPG, PNG, WEBP or GIF.")
+    content = await file.read()
+    if len(content) > MAX_UPLOAD_SIZE:
+        raise HTTPException(status_code=400, detail="File too large. Max 8 MB.")
+    ext = (file.filename or "").rsplit(".", 1)[-1].lower() if "." in (file.filename or "") else "jpg"
+    if ext not in {"jpg", "jpeg", "png", "webp", "gif"}:
+        ext = "jpg"
+    filename = f"{uuid.uuid4().hex}.{ext}"
+    dest = UPLOAD_DIR / filename
+    with open(dest, "wb") as out:
+        out.write(content)
+    return {"url": f"/api/uploads/{filename}", "filename": filename}
+
+
+# ---------------------------------------------------------------------------
 # Contact Form Routes
 # ---------------------------------------------------------------------------
 
@@ -546,6 +579,9 @@ app.add_middleware(
 
 
 app.include_router(api_router)
+
+# Serve uploaded images at /api/uploads/* so it goes through the ingress
+app.mount("/api/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
 
 logging.basicConfig(

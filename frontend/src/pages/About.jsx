@@ -1,6 +1,7 @@
 import React from 'react';
 import { Award, Target, Eye, Users, TrendingUp, Shield, GraduationCap } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
+import { Reveal } from '../hooks/useScrollReveal';
 
 const About = () => {
   const values = [
@@ -43,10 +44,8 @@ const About = () => {
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
-              About Us
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="section-badge-dark mb-6 inline-block">About Us</span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-4">
               Building Trust Through Professional Excellence
             </h1>
             <p className="text-xl text-blue-100">
@@ -60,13 +59,14 @@ const About = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div>
-                <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Our Story</span>
-                <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">
-                  Committed to Your Financial Success
-                </h2>
-              </div>
+            <Reveal>
+              <div className="space-y-6">
+                <div>
+                  <span className="section-badge">Our Story</span>
+                  <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-3">
+                    Committed to Your Financial Success
+                  </h2>
+                </div>
               <p className="text-gray-700 text-lg leading-relaxed">
                 Raghav Mittal & Associates is a newly established firm of Chartered Accountants founded with a clear vision: to provide comprehensive and reliable financial services with a fresh, modern approach. We combine ICAI-qualified expertise with a deep commitment to client success.
               </p>
@@ -76,14 +76,15 @@ const About = () => {
               <p className="text-gray-700 leading-relaxed">
                 As a new firm, we bring fresh perspectives, the latest knowledge of regulations, and the enthusiasm to deliver personalized attention to every client. Our commitment to staying updated with the latest regulatory changes ensures that our clients receive accurate and timely advice across various sectors.
               </p>
-            </div>
-            <div>
+              </div>
+            </Reveal>
+            <Reveal delay={150}>
               <img
                 src="https://images.pexels.com/photos/7654132/pexels-photo-7654132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                 alt="Our Team"
                 className="rounded-2xl shadow-xl"
               />
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -92,29 +93,33 @@ const About = () => {
       <section className="py-20 bg-blue-50/40">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="border-none shadow-xl bg-gradient-to-br from-blue-900 to-blue-800 text-white">
-              <CardContent className="p-8 space-y-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-xl border border-white/20">
-                  <Eye className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold">Our Vision</h3>
-                <p className="text-blue-100 text-lg leading-relaxed">
-                  To be a trusted and preferred financial advisory firm, recognized for delivering exceptional value through innovative solutions, professional excellence, and unwavering commitment to client success.
-                </p>
-              </CardContent>
-            </Card>
+            <Reveal>
+              <Card className="border-none shadow-xl bg-gradient-to-br from-blue-900 to-blue-800 text-white hover-lift">
+                <CardContent className="p-8 space-y-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-xl border border-white/20">
+                    <Eye className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold">Our Vision</h3>
+                  <p className="text-blue-100 text-lg leading-relaxed">
+                    To be a trusted and preferred financial advisory firm, recognized for delivering exceptional value through innovative solutions, professional excellence, and unwavering commitment to client success.
+                  </p>
+                </CardContent>
+              </Card>
+            </Reveal>
 
-            <Card className="border-none shadow-xl bg-white">
-              <CardContent className="p-8 space-y-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-xl border border-blue-200">
-                  <Target className="w-8 h-8 text-blue-900" />
-                </div>
-                <h3 className="text-2xl font-bold text-blue-900">Our Mission</h3>
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  To empower businesses and individuals with comprehensive financial, tax, and compliance solutions that are accurate, timely, and tailored to their unique needs, enabling them to achieve sustainable growth and financial security.
-                </p>
-              </CardContent>
-            </Card>
+            <Reveal delay={150}>
+              <Card className="border-none shadow-xl bg-white hover-lift">
+                <CardContent className="p-8 space-y-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-green-50 rounded-xl border border-green-200">
+                    <Target className="w-8 h-8 text-green-700" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-blue-900">Our Mission</h3>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    To empower businesses and individuals with comprehensive financial, tax, and compliance solutions that are accurate, timely, and tailored to their unique needs, enabling them to achieve sustainable growth and financial security.
+                  </p>
+                </CardContent>
+              </Card>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -122,23 +127,27 @@ const About = () => {
       {/* Core Values */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Core Values</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">What We Stand For</h2>
-          </div>
+          <Reveal>
+            <div className="text-center mb-12">
+              <span className="section-badge">Core Values</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-3">What We Stand For</h2>
+            </div>
+          </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
-                <Card key={index} className="border border-blue-100 shadow-sm hover:shadow-md transition-shadow duration-300 bg-white" data-testid={`value-card-${index}`}>
-                  <CardContent className="p-6 text-center space-y-4">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 text-blue-900 rounded-xl border border-blue-200">
-                      <Icon className="w-8 h-8" />
-                    </div>
-                    <h3 className="text-xl font-bold text-blue-900">{value.title}</h3>
-                    <p className="text-gray-600">{value.description}</p>
-                  </CardContent>
-                </Card>
+                <Reveal key={index} delay={index * 100}>
+                  <Card className="card-hover shadow-sm bg-white h-full" data-testid={`value-card-${index}`}>
+                    <CardContent className="p-6 text-center space-y-4">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 text-blue-900 rounded-xl border border-blue-200">
+                        <Icon className="w-8 h-8" />
+                      </div>
+                      <h3 className="text-xl font-bold text-blue-900">{value.title}</h3>
+                      <p className="text-gray-600">{value.description}</p>
+                    </CardContent>
+                  </Card>
+                </Reveal>
               );
             })}
           </div>
@@ -149,51 +158,51 @@ const About = () => {
       <section className="py-20 bg-blue-50/40">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Leadership</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">Meet Our Founder</h2>
-            </div>
-            <Card className="border-none shadow-xl">
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-3 gap-8 items-center">
-                  <div className="md:col-span-1">
-                    <div className="founder-image-wrapper aspect-square shadow-xl">
-                      <img
-                        src="/images/founder.jpeg"
-                        alt="CA Raghav Mittal"
-                        className="w-full h-full object-cover relative z-0"
-                        style={{
-                          background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)',
-                        }}
-                      />
+            <Reveal>
+              <div className="text-center mb-12">
+                <span className="section-badge">Leadership</span>
+                <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-3">Meet Our Founder</h2>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <Card className="border-none shadow-xl hover-lift">
+                <CardContent className="p-8">
+                  <div className="grid md:grid-cols-3 gap-8 items-center">
+                    <div className="md:col-span-1">
+                      <div className="founder-image-wrapper aspect-square">
+                        <img
+                          src="/images/founder.jpeg"
+                          alt="CA Raghav Mittal"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="md:col-span-2 space-y-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-blue-900">CA Raghav Mittal</h3>
-                      <p className="text-blue-700 font-semibold">Founder & Managing Partner</p>
-                    </div>
-                    <p className="text-gray-700 leading-relaxed">
-                      CA Raghav Mittal is an ICAI-qualified Chartered Accountant with a passion for delivering quality financial services. He founded Raghav Mittal & Associates with a vision to provide modern, reliable, and personalized financial solutions to clients across India.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed">
-                      With a strong foundation in taxation, audit, and financial advisory from his rigorous CA training, he brings a fresh approach to financial consulting. He is committed to staying current with the latest regulatory changes and leveraging technology to deliver efficient services.
-                    </p>
-                    <div className="pt-4">
-                      <h4 className="font-bold text-blue-900 mb-3">Areas of Expertise:</h4>
-                      <div className="grid grid-cols-2 gap-2">
-                        {expertise.map((item, index) => (
-                          <div key={index} className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-blue-700 rounded-full"></div>
-                            <span className="text-gray-700 text-sm">{item}</span>
-                          </div>
-                        ))}
+                    <div className="md:col-span-2 space-y-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-blue-900" style={{ fontFamily: "'Playfair Display', serif" }}>CA Raghav Mittal</h3>
+                        <p className="text-green-700 font-semibold">Founder &amp; Managing Partner</p>
+                      </div>
+                      <p className="text-gray-700 leading-relaxed">
+                        CA Raghav Mittal is an ICAI-qualified Chartered Accountant with a passion for delivering quality financial services. He founded Raghav Mittal &amp; Associates with a vision to provide modern, reliable, and personalized financial solutions to clients across India.
+                      </p>
+                      <p className="text-gray-700 leading-relaxed">
+                        With a strong foundation in taxation, audit, and financial advisory from his rigorous CA training, he brings a fresh approach to financial consulting. He is committed to staying current with the latest regulatory changes and leveraging technology to deliver efficient services.
+                      </p>
+                      <div className="pt-4">
+                        <h4 className="font-bold text-blue-900 mb-3">Areas of Expertise:</h4>
+                        <div className="grid grid-cols-2 gap-2">
+                          {expertise.map((item, index) => (
+                            <div key={index} className="flex items-center gap-2">
+                              <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                              <span className="text-gray-700 text-sm">{item}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -202,47 +211,51 @@ const About = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Our Credentials</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">Professional Qualifications</h2>
-            </div>
-            <Card className="border border-blue-100 shadow-md">
-              <CardContent className="p-8 space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200 flex-shrink-0">
-                    <GraduationCap className="w-6 h-6 text-blue-900" />
+            <Reveal>
+              <div className="text-center mb-12">
+                <span className="section-badge">Our Credentials</span>
+                <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-3">Professional Qualifications</h2>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <Card className="green-hover shadow-md bg-white">
+                <CardContent className="p-8 space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center border border-green-200 flex-shrink-0">
+                      <GraduationCap className="w-6 h-6 text-green-700" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-blue-900 mb-2">ICAI Qualified</h3>
+                      <p className="text-gray-700">
+                        Our founder is a qualified Chartered Accountant registered with the Institute of Chartered Accountants of India (ICAI), the premier professional accounting body in India.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-blue-900 mb-2">ICAI Qualified</h3>
-                    <p className="text-gray-700">
-                      Our founder is a qualified Chartered Accountant registered with the Institute of Chartered Accountants of India (ICAI), the premier professional accounting body in India.
-                    </p>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200 flex-shrink-0">
+                      <Award className="w-6 h-6 text-blue-900" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-blue-900 mb-2">Specialized Training</h3>
+                      <p className="text-gray-700">
+                        Comprehensive training across taxation, audit, financial reporting, and regulatory compliance, ensuring depth of knowledge across all service areas.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200 flex-shrink-0">
-                    <Award className="w-6 h-6 text-blue-900" />
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center border border-green-200 flex-shrink-0">
+                      <TrendingUp className="w-6 h-6 text-green-700" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-blue-900 mb-2">Continuous Learning</h3>
+                      <p className="text-gray-700">
+                        Committed to continuous professional development and staying updated with the latest amendments in tax laws, accounting standards, and regulatory frameworks.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-blue-900 mb-2">Specialized Training</h3>
-                    <p className="text-gray-700">
-                      Comprehensive training across taxation, audit, financial reporting, and regulatory compliance, ensuring depth of knowledge across all service areas.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200 flex-shrink-0">
-                    <TrendingUp className="w-6 h-6 text-blue-900" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-blue-900 mb-2">Continuous Learning</h3>
-                    <p className="text-gray-700">
-                      Committed to continuous professional development and staying updated with the latest amendments in tax laws, accounting standards, and regulatory frameworks.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Reveal>
           </div>
         </div>
       </section>

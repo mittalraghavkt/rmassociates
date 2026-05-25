@@ -39,6 +39,32 @@ const AdminDashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(emptyPost);
+  const [uploading, setUploading] = useState(false);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const { data } = await api.post('/admin/upload', fd, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      const fullUrl = data.url.startsWith('http')
+        ? data.url
+        : `${process.env.REACT_APP_BACKEND_URL}${data.url}`;
+      setForm((prev) => ({ ...prev, image: fullUrl }));
+      toast({ title: 'Image uploaded' });
+    } catch (err) {
+      toast({
+        title: 'Upload failed',
+        description: formatApiErrorDetail(err.response?.data?.detail) || 'Could not upload image',
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const loadPosts = async () => {
     setLoadingPosts(true);
@@ -352,12 +378,35 @@ const AdminDashboard = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700 block mb-1">Featured Image URL</label>
-                  <Input
-                    value={form.image}
-                    onChange={(e) => setForm({ ...form, image: e.target.value })}
-                    placeholder="https://..."
-                  />
+                  <label className="text-sm font-medium text-gray-700 block mb-1">Featured Image</label>
+                  <div className="flex flex-col sm:flex-row gap-3 items-start">
+                    <div className="flex-1 w-full">
+                      <Input
+                        value={form.image}
+                        onChange={(e) => setForm({ ...form, image: e.target.value })}
+                        placeholder="Paste image URL or upload below..."
+                        data-testid="form-image-url"
+                      />
+                      <div className="mt-2">
+                        <label className="inline-flex items-center gap-2 cursor-pointer bg-green-50 text-green-800 border border-green-200 hover:bg-green-100 px-3 py-1.5 rounded-md text-sm font-medium transition-colors">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={handleImageUpload}
+                            disabled={uploading}
+                            data-testid="form-image-upload"
+                          />
+                          {uploading ? 'Uploading...' : 'Upload Image'}
+                        </label>
+                      </div>
+                    </div>
+                    {form.image && (
+                      <div className="w-24 h-24 rounded-lg overflow-hidden border border-blue-100 flex-shrink-0 bg-gray-50">
+                        <img src={form.image} alt="preview" className="w-full h-full object-cover" />
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-1">Excerpt</label>

@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { useToast } from '../hooks/use-toast';
+import { Reveal } from '../hooks/useScrollReveal';
 import { api, formatApiErrorDetail } from '../lib/api';
 
 const Contact = () => {
@@ -73,10 +74,8 @@ const Contact = () => {
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
-              Get In Touch
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="section-badge-dark mb-6 inline-block">Get In Touch</span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-4">
               Let's Discuss Your Financial Needs
             </h1>
             <p className="text-xl text-blue-100">
@@ -93,27 +92,29 @@ const Contact = () => {
             {contactInfo.map((info, index) => {
               const Icon = info.icon;
               return (
-                <Card key={index} className="border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300 group bg-white" data-testid={`contact-info-${index}`}>
-                  <CardContent className="p-6 text-center space-y-4">
-                    <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-900 rounded-lg border border-blue-200 group-hover:bg-blue-100 transition-colors">
-                      <Icon className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-lg font-bold text-blue-900">{info.title}</h3>
-                    {info.link ? (
-                      <a href={info.link} className="block text-gray-700 hover:text-blue-900 transition-colors">
-                        {info.details.map((detail, idx) => (
-                          <p key={idx} className="text-sm">{detail}</p>
-                        ))}
-                      </a>
-                    ) : (
-                      <div className="text-gray-700">
-                        {info.details.map((detail, idx) => (
-                          <p key={idx} className="text-sm">{detail}</p>
-                        ))}
+                <Reveal key={index} delay={index * 80}>
+                  <Card className="card-hover shadow-sm bg-white group h-full" data-testid={`contact-info-${index}`}>
+                    <CardContent className="p-6 text-center space-y-4">
+                      <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-900 rounded-lg border border-blue-200 group-hover:bg-green-50 group-hover:text-green-700 group-hover:border-green-300 transition-all duration-300">
+                        <Icon className="w-7 h-7" />
                       </div>
-                    )}
-                  </CardContent>
-                </Card>
+                      <h3 className="text-lg font-bold text-blue-900">{info.title}</h3>
+                      {info.link ? (
+                        <a href={info.link} className="block text-gray-700 hover:text-green-700 transition-colors">
+                          {info.details.map((detail, idx) => (
+                            <p key={idx} className="text-sm">{detail}</p>
+                          ))}
+                        </a>
+                      ) : (
+                        <div className="text-gray-700">
+                          {info.details.map((detail, idx) => (
+                            <p key={idx} className="text-sm">{detail}</p>
+                          ))}
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Reveal>
               );
             })}
           </div>
@@ -268,7 +269,7 @@ const Contact = () => {
               <Card className="border border-blue-100 shadow-md h-full bg-white">
                 <CardContent className="p-0 h-full">
                   <iframe
-                    src="https://www.google.com/maps?q=Chhabra,+Baran,+Rajasthan+325220&output=embed"
+                    src="https://maps.google.com/maps?q=24.674278,76.849278&hl=en&z=16&output=embed"
                     width="100%"
                     height="600"
                     style={{ border: 0, borderRadius: '0.5rem' }}

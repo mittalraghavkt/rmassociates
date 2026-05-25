@@ -1,6 +1,7 @@
 import React from 'react';
 import { Award, Clock, Shield, Users, CheckCircle, Target, Zap, GraduationCap } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
+import { Reveal } from '../hooks/useScrollReveal';
 
 const WhyUs = () => {
   const reasons = [
@@ -52,10 +53,8 @@ const WhyUs = () => {
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
-              Why Choose Us
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="section-badge-dark mb-6 inline-block">Why Choose Us</span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-4">
               Your Dedicated Partner for Financial Excellence
             </h1>
             <p className="text-xl text-blue-100">
@@ -81,15 +80,17 @@ const WhyUs = () => {
             {reasons.map((reason, index) => {
               const Icon = reason.icon;
               return (
-                <Card key={index} className="border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group bg-white" data-testid={`why-us-card-${index}`}>
-                  <CardContent className="p-6 space-y-4">
-                    <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-900 rounded-lg border border-blue-200 group-hover:bg-blue-100 transition-colors">
-                      <Icon className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-xl font-bold text-blue-900">{reason.title}</h3>
-                    <p className="text-gray-600 text-sm">{reason.description}</p>
-                  </CardContent>
-                </Card>
+                <Reveal key={index} delay={(index % 4) * 100}>
+                  <Card className="card-hover shadow-sm bg-white group h-full" data-testid={`why-us-card-${index}`}>
+                    <CardContent className="p-6 space-y-4">
+                      <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-900 rounded-lg border border-blue-200 group-hover:bg-green-50 group-hover:text-green-700 group-hover:border-green-300 transition-all duration-300">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-xl font-bold text-blue-900">{reason.title}</h3>
+                      <p className="text-gray-600 text-sm">{reason.description}</p>
+                    </CardContent>
+                  </Card>
+                </Reveal>
               );
             })}
           </div>
@@ -106,41 +107,49 @@ const WhyUs = () => {
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="border-l-4 border-l-blue-900 shadow-sm bg-white">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold text-blue-900 mb-2">Quality Assurance</h3>
-                  <p className="text-gray-700 text-sm">
-                    Every deliverable goes through rigorous quality checks to ensure accuracy and compliance.
-                  </p>
-                </CardContent>
-              </Card>
+              <Reveal>
+                <Card className="green-hover border-l-4 border-l-blue-900 shadow-sm bg-white">
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold text-blue-900 mb-2">Quality Assurance</h3>
+                    <p className="text-gray-700 text-sm">
+                      Every deliverable goes through rigorous quality checks to ensure accuracy and compliance.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Reveal>
 
-              <Card className="border-l-4 border-l-blue-700 shadow-sm bg-white">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold text-blue-900 mb-2">Responsive Support</h3>
-                  <p className="text-gray-700 text-sm">
-                    Quick response to your queries and concerns. We're always available when you need us.
-                  </p>
-                </CardContent>
-              </Card>
+              <Reveal delay={100}>
+                <Card className="green-hover border-l-4 border-l-green-600 shadow-sm bg-white">
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold text-blue-900 mb-2">Responsive Support</h3>
+                    <p className="text-gray-700 text-sm">
+                      Quick response to your queries and concerns. We're always available when you need us.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Reveal>
 
-              <Card className="border-l-4 border-l-blue-900 shadow-sm bg-white">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold text-blue-900 mb-2">Proactive Advisory</h3>
-                  <p className="text-gray-700 text-sm">
-                    We don't just react to problems - we proactively guide you towards better financial decisions.
-                  </p>
-                </CardContent>
-              </Card>
+              <Reveal delay={150}>
+                <Card className="green-hover border-l-4 border-l-blue-900 shadow-sm bg-white">
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold text-blue-900 mb-2">Proactive Advisory</h3>
+                    <p className="text-gray-700 text-sm">
+                      We don't just react to problems - we proactively guide you towards better financial decisions.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Reveal>
 
-              <Card className="border-l-4 border-l-blue-700 shadow-sm bg-white">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold text-blue-900 mb-2">Long-term Partnership</h3>
-                  <p className="text-gray-700 text-sm">
-                    We're not just service providers - we're your long-term financial partners committed to your growth.
-                  </p>
-                </CardContent>
-              </Card>
+              <Reveal delay={200}>
+                <Card className="green-hover border-l-4 border-l-green-600 shadow-sm bg-white">
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold text-blue-900 mb-2">Long-term Partnership</h3>
+                    <p className="text-gray-700 text-sm">
+                      We're not just service providers - we're your long-term financial partners committed to your growth.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Reveal>
             </div>
           </div>
         </div>

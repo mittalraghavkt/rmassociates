@@ -1,6 +1,7 @@
 import React from 'react';
 import { Factory, ShoppingCart, Rocket, Building, ShoppingBag, Hotel, Landmark, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
+import { Reveal } from '../hooks/useScrollReveal';
 
 const Industries = () => {
   const industries = [
@@ -60,10 +61,8 @@ const Industries = () => {
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
-              Industries We Serve
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="section-badge-dark mb-6 inline-block">Industries We Serve</span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-4">
               Industry-Specific Financial Solutions
             </h1>
             <p className="text-xl text-blue-100">
@@ -89,26 +88,28 @@ const Industries = () => {
             {industries.map((industry, index) => {
               const Icon = industry.icon;
               return (
-                <Card key={index} className="border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group bg-white" data-testid={`industry-card-${index}`}>
-                  <CardContent className="p-6 space-y-4">
-                    <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-900 rounded-lg border border-blue-200 group-hover:bg-blue-100 transition-colors">
-                      <Icon className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-xl font-bold text-blue-900">{industry.title}</h3>
-                    <p className="text-gray-600 text-sm">{industry.description}</p>
-                    <div className="pt-2">
-                      <h4 className="font-semibold text-blue-900 mb-2 text-xs uppercase tracking-wide">Key Services:</h4>
-                      <ul className="space-y-1">
-                        {industry.services.map((service, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
-                            <span className="text-blue-700 mt-0.5">•</span>
-                            <span>{service}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
+                <Reveal key={index} delay={(index % 4) * 80}>
+                  <Card className="card-hover shadow-sm bg-white group h-full" data-testid={`industry-card-${index}`}>
+                    <CardContent className="p-6 space-y-4">
+                      <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-900 rounded-lg border border-blue-200 group-hover:bg-green-50 group-hover:text-green-700 group-hover:border-green-300 transition-all duration-300">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-xl font-bold text-blue-900">{industry.title}</h3>
+                      <p className="text-gray-600 text-sm">{industry.description}</p>
+                      <div className="pt-2">
+                        <h4 className="font-semibold text-blue-900 mb-2 text-xs uppercase tracking-wide">Key Services:</h4>
+                        <ul className="space-y-1">
+                          {industry.services.map((service, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                              <span className="text-green-600 mt-0.5">•</span>
+                              <span>{service}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Reveal>
               );
             })}
           </div>
@@ -125,41 +126,49 @@ const Industries = () => {
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="border-l-4 border-l-blue-900 shadow-sm bg-white">
-                <CardContent className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-blue-900">Regulatory Knowledge</h3>
-                  <p className="text-gray-700">
-                    Each industry has unique regulatory requirements. Our industry-specific expertise ensures complete compliance with sector-specific laws and regulations.
-                  </p>
-                </CardContent>
-              </Card>
+              <Reveal>
+                <Card className="green-hover border-l-4 border-l-blue-900 shadow-sm bg-white">
+                  <CardContent className="p-6 space-y-3">
+                    <h3 className="text-xl font-bold text-blue-900">Regulatory Knowledge</h3>
+                    <p className="text-gray-700">
+                      Each industry has unique regulatory requirements. Our industry-specific expertise ensures complete compliance with sector-specific laws and regulations.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Reveal>
 
-              <Card className="border-l-4 border-l-blue-700 shadow-sm bg-white">
-                <CardContent className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-blue-900">Best Practices</h3>
-                  <p className="text-gray-700">
-                    We bring industry best practices and benchmarks to help you optimize operations, reduce costs, and improve financial performance.
-                  </p>
-                </CardContent>
-              </Card>
+              <Reveal delay={120}>
+                <Card className="green-hover border-l-4 border-l-green-600 shadow-sm bg-white">
+                  <CardContent className="p-6 space-y-3">
+                    <h3 className="text-xl font-bold text-blue-900">Best Practices</h3>
+                    <p className="text-gray-700">
+                      We bring industry best practices and benchmarks to help you optimize operations, reduce costs, and improve financial performance.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Reveal>
 
-              <Card className="border-l-4 border-l-blue-900 shadow-sm bg-white">
-                <CardContent className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-blue-900">Tailored Solutions</h3>
-                  <p className="text-gray-700">
-                    Generic solutions don't work for specialized industries. We customize our services to address your industry's specific challenges and opportunities.
-                  </p>
-                </CardContent>
-              </Card>
+              <Reveal delay={150}>
+                <Card className="green-hover border-l-4 border-l-blue-900 shadow-sm bg-white">
+                  <CardContent className="p-6 space-y-3">
+                    <h3 className="text-xl font-bold text-blue-900">Tailored Solutions</h3>
+                    <p className="text-gray-700">
+                      Generic solutions don't work for specialized industries. We customize our services to address your industry's specific challenges and opportunities.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Reveal>
 
-              <Card className="border-l-4 border-l-blue-700 shadow-sm bg-white">
-                <CardContent className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-blue-900">Strategic Insights</h3>
-                  <p className="text-gray-700">
-                    Our industry knowledge enables us to provide strategic insights that go beyond compliance, helping you make informed business decisions.
-                  </p>
-                </CardContent>
-              </Card>
+              <Reveal delay={200}>
+                <Card className="green-hover border-l-4 border-l-green-600 shadow-sm bg-white">
+                  <CardContent className="p-6 space-y-3">
+                    <h3 className="text-xl font-bold text-blue-900">Strategic Insights</h3>
+                    <p className="text-gray-700">
+                      Our industry knowledge enables us to provide strategic insights that go beyond compliance, helping you make informed business decisions.
+                    </p>
+                  </CardContent>
+                </Card>
+              </Reveal>
             </div>
           </div>
         </div>
