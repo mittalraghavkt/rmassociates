@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Target, Eye, Users, TrendingUp, Shield } from 'lucide-react';
+import { Award, Target, Eye, Users, TrendingUp, Shield, GraduationCap } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 
 const About = () => {
@@ -38,19 +38,19 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" data-testid="about-page">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white py-20">
+      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-yellow-500/20 text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold border border-yellow-400/30 mb-6">
+            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
               About Us
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Building Trust Through Professional Excellence
             </h1>
             <p className="text-xl text-blue-100">
-              A legacy of delivering reliable financial solutions with integrity and expertise
+              A dedicated commitment to delivering reliable financial solutions with integrity
             </p>
           </div>
         </div>
@@ -62,19 +62,19 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div>
-                <span className="text-yellow-600 font-semibold text-sm uppercase tracking-wide">Our Story</span>
+                <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Our Story</span>
                 <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">
                   Committed to Your Financial Success
                 </h2>
               </div>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Raghav Mittal & Associates was founded with a vision to provide comprehensive and reliable financial services to businesses and individuals. Over the years, we have grown into a trusted name in the field of chartered accountancy, known for our professionalism, accuracy, and client-centric approach.
+                Raghav Mittal & Associates is a newly established firm of Chartered Accountants founded with a clear vision: to provide comprehensive and reliable financial services with a fresh, modern approach. We combine ICAI-qualified expertise with a deep commitment to client success.
               </p>
               <p className="text-gray-700 leading-relaxed">
                 Our firm specializes in taxation, audit, compliance, and financial advisory services. We serve a diverse clientele including corporations, SMEs, startups, and individuals, helping them navigate complex financial regulations while optimizing their financial performance.
               </p>
               <p className="text-gray-700 leading-relaxed">
-                With deep industry knowledge and a commitment to staying updated with regulatory changes, we ensure that our clients receive the most accurate and timely advice. Our team of qualified professionals brings expertise across various sectors including manufacturing, trading, real estate, e-commerce, and financial services.
+                As a new firm, we bring fresh perspectives, the latest knowledge of regulations, and the enthusiasm to deliver personalized attention to every client. Our commitment to staying updated with the latest regulatory changes ensures that our clients receive accurate and timely advice across various sectors.
               </p>
             </div>
             <div>
@@ -89,28 +89,28 @@ const About = () => {
       </section>
 
       {/* Vision & Mission */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-20 bg-blue-50/40">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="border-none shadow-xl bg-gradient-to-br from-blue-900 to-blue-800 text-white">
               <CardContent className="p-8 space-y-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-xl">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-xl border border-white/20">
                   <Eye className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold">Our Vision</h3>
                 <p className="text-blue-100 text-lg leading-relaxed">
-                  To be the most trusted and preferred financial advisory firm, recognized for delivering exceptional value through innovative solutions, professional excellence, and unwavering commitment to client success.
+                  To be a trusted and preferred financial advisory firm, recognized for delivering exceptional value through innovative solutions, professional excellence, and unwavering commitment to client success.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-xl bg-gradient-to-br from-yellow-500 to-yellow-600 text-white">
+            <Card className="border-none shadow-xl bg-white">
               <CardContent className="p-8 space-y-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-xl">
-                  <Target className="w-8 h-8 text-yellow-600" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-xl border border-blue-200">
+                  <Target className="w-8 h-8 text-blue-900" />
                 </div>
-                <h3 className="text-2xl font-bold">Our Mission</h3>
-                <p className="text-yellow-50 text-lg leading-relaxed">
+                <h3 className="text-2xl font-bold text-blue-900">Our Mission</h3>
+                <p className="text-gray-700 text-lg leading-relaxed">
                   To empower businesses and individuals with comprehensive financial, tax, and compliance solutions that are accurate, timely, and tailored to their unique needs, enabling them to achieve sustainable growth and financial security.
                 </p>
               </CardContent>
@@ -123,16 +123,16 @@ const About = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <span className="text-yellow-600 font-semibold text-sm uppercase tracking-wide">Core Values</span>
+            <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Core Values</span>
             <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">What We Stand For</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
-                <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Card key={index} className="border border-blue-100 shadow-sm hover:shadow-md transition-shadow duration-300 bg-white" data-testid={`value-card-${index}`}>
                   <CardContent className="p-6 text-center space-y-4">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 text-blue-900 rounded-xl border border-blue-200">
                       <Icon className="w-8 h-8" />
                     </div>
                     <h3 className="text-xl font-bold text-blue-900">{value.title}</h3>
@@ -146,11 +146,11 @@ const About = () => {
       </section>
 
       {/* Founder Profile */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-20 bg-blue-50/40">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <span className="text-yellow-600 font-semibold text-sm uppercase tracking-wide">Leadership</span>
+              <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Leadership</span>
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">Meet Our Founder</h2>
             </div>
             <Card className="border-none shadow-xl">
@@ -166,20 +166,20 @@ const About = () => {
                   <div className="md:col-span-2 space-y-4">
                     <div>
                       <h3 className="text-2xl font-bold text-blue-900">CA Raghav Mittal</h3>
-                      <p className="text-yellow-600 font-semibold">Founder & Managing Partner</p>
+                      <p className="text-blue-700 font-semibold">Founder & Managing Partner</p>
                     </div>
                     <p className="text-gray-700 leading-relaxed">
-                      CA Raghav Mittal is a qualified Chartered Accountant with extensive experience in taxation, audit, and financial advisory. With a deep understanding of business dynamics and regulatory frameworks, he has successfully guided numerous businesses towards financial excellence.
+                      CA Raghav Mittal is an ICAI-qualified Chartered Accountant with a passion for delivering quality financial services. He founded Raghav Mittal & Associates with a vision to provide modern, reliable, and personalized financial solutions to clients across India.
                     </p>
                     <p className="text-gray-700 leading-relaxed">
-                      His expertise spans across various industries, and he is known for his strategic approach to complex financial matters. Under his leadership, Raghav Mittal & Associates has grown to become a trusted partner for businesses seeking reliable financial solutions.
+                      With a strong foundation in taxation, audit, and financial advisory from his rigorous CA training, he brings a fresh approach to financial consulting. He is committed to staying current with the latest regulatory changes and leveraging technology to deliver efficient services.
                     </p>
                     <div className="pt-4">
                       <h4 className="font-bold text-blue-900 mb-3">Areas of Expertise:</h4>
                       <div className="grid grid-cols-2 gap-2">
                         {expertise.map((item, index) => (
                           <div key={index} className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                            <div className="w-2 h-2 bg-blue-700 rounded-full"></div>
                             <span className="text-gray-700 text-sm">{item}</span>
                           </div>
                         ))}
@@ -193,63 +193,51 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team & Credentials */}
+      {/* Professional Credentials */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <span className="text-yellow-600 font-semibold text-sm uppercase tracking-wide">Our Team</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">Professional Credentials</h2>
+              <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">Our Credentials</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2">Professional Qualifications</h2>
             </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="border-l-4 border-l-blue-900 shadow-lg">
-                <CardContent className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-blue-900">Qualifications</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-start gap-2">
-                      <span className="text-yellow-500 mt-1">•</span>
-                      <span>Qualified Chartered Accountants from ICAI</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-yellow-500 mt-1">•</span>
-                      <span>Specialized training in taxation and audit</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-yellow-500 mt-1">•</span>
-                      <span>Continuous professional development</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-yellow-500 mt-1">•</span>
-                      <span>Industry-specific expertise</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="border-l-4 border-l-yellow-500 shadow-lg">
-                <CardContent className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-blue-900">Experience</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li className="flex items-start gap-2">
-                      <span className="text-yellow-500 mt-1">•</span>
-                      <span>15+ years of combined experience</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-yellow-500 mt-1">•</span>
-                      <span>Served 500+ clients across industries</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-yellow-500 mt-1">•</span>
-                      <span>Successfully handled complex financial matters</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-yellow-500 mt-1">•</span>
-                      <span>Expert in regulatory compliance</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
+            <Card className="border border-blue-100 shadow-md">
+              <CardContent className="p-8 space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200 flex-shrink-0">
+                    <GraduationCap className="w-6 h-6 text-blue-900" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-blue-900 mb-2">ICAI Qualified</h3>
+                    <p className="text-gray-700">
+                      Our founder is a qualified Chartered Accountant registered with the Institute of Chartered Accountants of India (ICAI), the premier professional accounting body in India.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200 flex-shrink-0">
+                    <Award className="w-6 h-6 text-blue-900" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-blue-900 mb-2">Specialized Training</h3>
+                    <p className="text-gray-700">
+                      Comprehensive training across taxation, audit, financial reporting, and regulatory compliance, ensuring depth of knowledge across all service areas.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200 flex-shrink-0">
+                    <TrendingUp className="w-6 h-6 text-blue-900" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-blue-900 mb-2">Continuous Learning</h3>
+                    <p className="text-gray-700">
+                      Committed to continuous professional development and staying updated with the latest amendments in tax laws, accounting standards, and regulatory frameworks.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

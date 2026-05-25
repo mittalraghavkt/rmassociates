@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, Linkedin } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, Linkedin, MessageCircle } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -22,79 +22,67 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Frontend UI only - Show success message
     toast({
       title: 'Message Sent Successfully!',
       description: 'We will get back to you within 24 hours.',
     });
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
+    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
   };
 
   const contactInfo = [
     {
       icon: MapPin,
       title: 'Office Address',
-      details: ['Venkatesh Villa, Station Road', 'Chhabra, Dist. Baran', 'Rajasthan - 325220'],
-      color: 'from-blue-500 to-blue-600'
+      details: ['Venkatesh Villa, Station Road', 'Chhabra, Dist. Baran', 'Rajasthan - 325220']
     },
     {
       icon: Phone,
       title: 'Phone Number',
       details: ['+91 9521452288'],
-      link: 'tel:9521452288',
-      color: 'from-emerald-500 to-emerald-600'
+      link: 'tel:9521452288'
     },
     {
       icon: Mail,
       title: 'Email Address',
       details: ['mittalraghavkt@gmail.com'],
-      link: 'mailto:mittalraghavkt@gmail.com',
-      color: 'from-orange-500 to-orange-600'
+      link: 'mailto:mittalraghavkt@gmail.com'
     },
     {
       icon: Clock,
       title: 'Working Hours',
-      details: ['Monday - Saturday: 10:00 AM - 7:00 PM', 'Sunday: By Appointment'],
-      color: 'from-purple-500 to-purple-600'
+      details: ['Monday - Saturday: 10:00 AM - 7:00 PM', 'Sunday: By Appointment']
     }
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" data-testid="contact-page">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white py-20">
+      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-yellow-500/20 text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold border border-yellow-400/30 mb-6">
+            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
               Get In Touch
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Let's Discuss Your Financial Needs
             </h1>
             <p className="text-xl text-blue-100">
-              Reach out to us for expert financial guidance and consultation
+              Reach out to us for professional financial guidance and consultation
             </p>
           </div>
         </div>
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactInfo.map((info, index) => {
               const Icon = info.icon;
               return (
-                <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-all duration-300 group">
+                <Card key={index} className="border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300 group bg-white" data-testid={`contact-info-${index}`}>
                   <CardContent className="p-6 text-center space-y-4">
-                    <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${info.color} text-white rounded-lg group-hover:scale-110 transition-transform`}>
+                    <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-900 rounded-lg border border-blue-200 group-hover:bg-blue-100 transition-colors">
                       <Icon className="w-7 h-7" />
                     </div>
                     <h3 className="text-lg font-bold text-blue-900">{info.title}</h3>
@@ -121,13 +109,13 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <Card className="border-none shadow-xl">
+              <Card className="border border-blue-100 shadow-md bg-white">
                 <CardContent className="p-8">
                   <div className="mb-6">
                     <h2 className="text-2xl font-bold text-blue-900 mb-2">Send Us a Message</h2>
                     <p className="text-gray-600">Fill out the form below and we'll get back to you within 24 hours.</p>
                   </div>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-4" data-testid="contact-form">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                         Full Name *
@@ -141,6 +129,7 @@ const Contact = () => {
                         placeholder="Enter your name"
                         required
                         className="w-full"
+                        data-testid="contact-form-name"
                       />
                     </div>
                     <div>
@@ -156,6 +145,7 @@ const Contact = () => {
                         placeholder="your.email@example.com"
                         required
                         className="w-full"
+                        data-testid="contact-form-email"
                       />
                     </div>
                     <div>
@@ -171,6 +161,7 @@ const Contact = () => {
                         placeholder="+91 XXXXX XXXXX"
                         required
                         className="w-full"
+                        data-testid="contact-form-phone"
                       />
                     </div>
                     <div>
@@ -186,6 +177,7 @@ const Contact = () => {
                         placeholder="How can we help you?"
                         required
                         className="w-full"
+                        data-testid="contact-form-subject"
                       />
                     </div>
                     <div>
@@ -201,12 +193,14 @@ const Contact = () => {
                         required
                         rows={5}
                         className="w-full"
+                        data-testid="contact-form-message"
                       />
                     </div>
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 text-white font-semibold"
+                      className="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold"
                       size="lg"
+                      data-testid="contact-form-submit"
                     >
                       Send Message
                       <Send className="ml-2 w-4 h-4" />
@@ -216,7 +210,7 @@ const Contact = () => {
               </Card>
 
               {/* Social Connect */}
-              <Card className="border-none shadow-xl mt-6">
+              <Card className="border border-blue-100 shadow-md mt-6 bg-white">
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold text-blue-900 mb-4">Connect With Us</h3>
                   <div className="space-y-3">
@@ -224,13 +218,14 @@ const Contact = () => {
                       href="https://wa.me/919521452288"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors group"
+                      className="flex items-center gap-3 p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors group border border-blue-100"
+                      data-testid="whatsapp-link"
                     >
-                      <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                        <Phone className="w-5 h-5" />
+                      <div className="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                        <MessageCircle className="w-5 h-5" />
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900">WhatsApp</div>
+                        <div className="font-semibold text-blue-900">WhatsApp</div>
                         <div className="text-sm text-gray-600">Quick response via WhatsApp</div>
                       </div>
                     </a>
@@ -238,13 +233,14 @@ const Contact = () => {
                       href="https://www.linkedin.com/in/caraghavmittal25"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors group"
+                      className="flex items-center gap-3 p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors group border border-blue-100"
+                      data-testid="linkedin-link"
                     >
-                      <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                         <Linkedin className="w-5 h-5" />
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900">LinkedIn</div>
+                        <div className="font-semibold text-blue-900">LinkedIn</div>
                         <div className="text-sm text-gray-600">Connect professionally</div>
                       </div>
                     </a>
@@ -255,10 +251,10 @@ const Contact = () => {
 
             {/* Map */}
             <div>
-              <Card className="border-none shadow-xl h-full">
+              <Card className="border border-blue-100 shadow-md h-full bg-white">
                 <CardContent className="p-0 h-full">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3590.123456789!2d76.8!3d24.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQyJzAwLjAiTiA3NsKwNDgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                    src="https://www.google.com/maps?q=Chhabra,+Baran,+Rajasthan+325220&output=embed"
                     width="100%"
                     height="600"
                     style={{ border: 0, borderRadius: '0.5rem' }}
@@ -266,6 +262,7 @@ const Contact = () => {
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Office Location"
+                    data-testid="office-map"
                   ></iframe>
                 </CardContent>
               </Card>
@@ -274,21 +271,21 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Appointment CTA */}
-      <section className="py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white">
+      {/* Direct Contact CTA */}
+      <section className="py-20 bg-blue-900 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Prefer a Direct Consultation?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Schedule a meeting with our experts to discuss your financial requirements in detail.
+            Get in touch with us directly to discuss your financial requirements.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:9521452288">
-              <Button size="lg" className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-semibold px-8 shadow-xl">
+            <a href="tel:9521452288" data-testid="call-now-btn">
+              <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold px-8 shadow-xl">
                 <Phone className="mr-2 w-5 h-5" />
                 Call Now
               </Button>
             </a>
-            <a href="https://wa.me/919521452288" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/919521452288" target="_blank" rel="noopener noreferrer" data-testid="whatsapp-cta-btn">
               <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-semibold px-8">
                 WhatsApp Us
               </Button>

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Factory, ShoppingCart, Rocket, Building, ShoppingBag, Hotel, Landmark, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
-import { Link } from 'react-router-dom';
-import { Button } from '../components/ui/button';
 
 const Industries = () => {
   const industries = [
@@ -57,33 +55,33 @@ const Industries = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" data-testid="industries-page">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white py-20">
+      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-yellow-500/20 text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold border border-yellow-400/30 mb-6">
+            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
               Industries We Serve
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Industry-Specific Financial Solutions
             </h1>
             <p className="text-xl text-blue-100">
-              Deep expertise across diverse sectors with tailored solutions for your industry's unique challenges
+              Specialized expertise across diverse sectors with tailored solutions for your industry's unique challenges
             </p>
           </div>
         </div>
       </section>
 
       {/* Industries Section */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
               Serving Multiple Industries
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our team understands the unique financial and regulatory requirements of different industries, delivering specialized solutions that drive growth.
+              We understand the unique financial and regulatory requirements of different industries, delivering specialized solutions that drive growth.
             </p>
           </div>
           
@@ -91,9 +89,9 @@ const Industries = () => {
             {industries.map((industry, index) => {
               const Icon = industry.icon;
               return (
-                <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                <Card key={index} className="border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group bg-white" data-testid={`industry-card-${index}`}>
                   <CardContent className="p-6 space-y-4">
-                    <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg group-hover:scale-110 transition-transform">
+                    <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 text-blue-900 rounded-lg border border-blue-200 group-hover:bg-blue-100 transition-colors">
                       <Icon className="w-7 h-7" />
                     </div>
                     <h3 className="text-xl font-bold text-blue-900">{industry.title}</h3>
@@ -103,7 +101,7 @@ const Industries = () => {
                       <ul className="space-y-1">
                         {industry.services.map((service, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
-                            <span className="text-yellow-500 mt-0.5">•</span>
+                            <span className="text-blue-700 mt-0.5">•</span>
                             <span>{service}</span>
                           </li>
                         ))}
@@ -118,7 +116,7 @@ const Industries = () => {
       </section>
 
       {/* Why Industry Expertise Matters */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-blue-50/40">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
@@ -127,7 +125,7 @@ const Industries = () => {
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="border-l-4 border-l-blue-900 shadow-lg">
+              <Card className="border-l-4 border-l-blue-900 shadow-sm bg-white">
                 <CardContent className="p-6 space-y-3">
                   <h3 className="text-xl font-bold text-blue-900">Regulatory Knowledge</h3>
                   <p className="text-gray-700">
@@ -136,7 +134,7 @@ const Industries = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-l-yellow-500 shadow-lg">
+              <Card className="border-l-4 border-l-blue-700 shadow-sm bg-white">
                 <CardContent className="p-6 space-y-3">
                   <h3 className="text-xl font-bold text-blue-900">Best Practices</h3>
                   <p className="text-gray-700">
@@ -145,7 +143,7 @@ const Industries = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-l-blue-900 shadow-lg">
+              <Card className="border-l-4 border-l-blue-900 shadow-sm bg-white">
                 <CardContent className="p-6 space-y-3">
                   <h3 className="text-xl font-bold text-blue-900">Tailored Solutions</h3>
                   <p className="text-gray-700">
@@ -154,31 +152,16 @@ const Industries = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-l-yellow-500 shadow-lg">
+              <Card className="border-l-4 border-l-blue-700 shadow-sm bg-white">
                 <CardContent className="p-6 space-y-3">
                   <h3 className="text-xl font-bold text-blue-900">Strategic Insights</h3>
                   <p className="text-gray-700">
-                    Our deep industry knowledge enables us to provide strategic insights that go beyond compliance, helping you make informed business decisions.
+                    Our industry knowledge enables us to provide strategic insights that go beyond compliance, helping you make informed business decisions.
                   </p>
                 </CardContent>
               </Card>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Work with Industry Experts?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Let us help you navigate your industry's financial and regulatory landscape with confidence.
-          </p>
-          <Link to="/contact">
-            <Button size="lg" className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-semibold px-8 shadow-xl">
-              Schedule a Consultation
-            </Button>
-          </Link>
         </div>
       </section>
     </div>

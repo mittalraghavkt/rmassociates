@@ -25,10 +25,10 @@ const Blog = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white py-20">
+      <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-yellow-500/20 text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold border border-yellow-400/30 mb-6">
+            <span className="inline-block bg-blue-700/40 text-blue-100 px-4 py-2 rounded-full text-sm font-semibold border border-blue-300/30 mb-6">
               Insights & Updates
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -93,7 +93,7 @@ const Blog = () => {
                   <CardContent className="p-8 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-4 mb-4 text-sm text-gray-600">
-                        <span className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-semibold">
+                        <span className="inline-flex items-center gap-1 bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold">
                           <Tag className="w-3 h-3" />
                           {latestPost.category}
                         </span>
@@ -149,7 +149,7 @@ const Blog = () => {
                     </div>
                     <CardContent className="p-6">
                       <div className="flex items-center gap-4 mb-3 text-sm text-gray-600">
-                        <span className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-semibold text-xs">
+                        <span className="inline-flex items-center gap-1 bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-semibold text-xs">
                           <Tag className="w-3 h-3" />
                           {post.category}
                         </span>
@@ -179,14 +179,14 @@ const Blog = () => {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white">
+      <section className="py-20 bg-blue-900 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Stay Informed</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Subscribe to our newsletter for the latest tax updates and financial insights delivered to your inbox.
           </p>
           <Link to="/contact">
-            <Button size="lg" className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-semibold px-8 shadow-xl">
+            <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold px-8 shadow-xl">
               Contact Us for Updates
             </Button>
           </Link>

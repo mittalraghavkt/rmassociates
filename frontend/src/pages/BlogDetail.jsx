@@ -50,7 +50,7 @@ const BlogDetail = () => {
           <div className="max-w-4xl mx-auto">
             {/* Meta Info */}
             <div className="flex flex-wrap items-center gap-4 mb-6">
-              <span className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-semibold text-sm">
+              <span className="inline-flex items-center gap-1 bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold text-sm">
                 <Tag className="w-4 h-4" />
                 {post.category}
               </span>
@@ -105,15 +105,15 @@ const BlogDetail = () => {
             </Card>
 
             {/* Call to Action */}
-            <Card className="border-none shadow-lg bg-gradient-to-r from-blue-900 to-blue-800 text-white mb-12">
+            <Card className="border-none shadow-lg bg-blue-900 text-white mb-12">
               <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold mb-4">Need Expert Advice?</h3>
+                <h3 className="text-2xl font-bold mb-4">Need Professional Advice?</h3>
                 <p className="text-blue-100 mb-6">
-                  Our chartered accountants are here to help you with personalized financial and tax solutions.
+                  Our chartered accountant is here to help you with personalized financial and tax solutions.
                 </p>
                 <Link to="/contact">
-                  <Button size="lg" className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-semibold px-8">
-                    Schedule Consultation
+                  <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold px-8">
+                    Contact Us
                   </Button>
                 </Link>
               </CardContent>
@@ -134,7 +134,7 @@ const BlogDetail = () => {
                         />
                       </div>
                       <CardContent className="p-4">
-                        <span className="inline-block bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-semibold text-xs mb-2">
+                        <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-semibold text-xs mb-2">
                           {relatedPost.category}
                         </span>
                         <h3 className="text-sm font-bold text-blue-900 mb-2 line-clamp-2">{relatedPost.title}</h3>
