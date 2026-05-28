@@ -73,13 +73,14 @@ def create_refresh_token(user_id: str) -> str:
 
 
 def set_auth_cookies(response: Response, access_token: str, refresh_token: str):
+    # CHANGED: secure=True and samesite="none" allows authentication to pass smoothly from backend to Cloudflare Pages domain
     response.set_cookie(
         key="access_token", value=access_token, httponly=True,
-        secure=False, samesite="lax", max_age=43200, path="/",
+        secure=True, samesite="none", max_age=43200, path="/",
     )
     response.set_cookie(
         key="refresh_token", value=refresh_token, httponly=True,
-        secure=False, samesite="lax", max_age=604800, path="/",
+        secure=True, samesite="none", max_age=604800, path="/",
     )
 
 
@@ -225,6 +226,7 @@ async def login(payload: LoginRequest, response: Response):
         "email": user["email"],
         "name": user.get("name", "Admin"),
         "role": user.get("role", "admin"),
+        "token": access_token  # Attached token directly to response body as a frontend fallback header mechanism
     }
 
 
@@ -301,7 +303,6 @@ async def create_blog_post(
 ):
     slug = slugify(payload.title)
 
-    # Make slug unique
     existing = await db.blog_posts.find_one({"slug": slug})
     if existing:
         slug = f"{slug}-{str(uuid.uuid4())[:6]}"
@@ -330,7 +331,6 @@ async def update_blog_post(
     update_data = {k: v for k, v in payload.model_dump().items() if v is not None}
     if "title" in update_data:
         new_slug = slugify(update_data["title"])
-        # ensure uniqueness if slug actually changes
         existing = await db.blog_posts.find_one({"slug": new_slug, "_id": {"$ne": oid}})
         if existing:
             new_slug = f"{new_slug}-{str(uuid.uuid4())[:6]}"
@@ -534,7 +534,6 @@ INITIAL_BLOG_POSTS = [
 
 @app.on_event("startup")
 async def startup_db():
-    # Indexes
     await db.users.create_index("email", unique=True)
     await db.blog_posts.create_index("slug", unique=True)
     await db.blog_posts.create_index("published_at")
@@ -557,7 +556,6 @@ async def startup_db():
         )
         logging.info(f"Updated admin password for: {ADMIN_EMAIL}")
 
-    # Seed initial blog posts if none exist
     count = await db.blog_posts.count_documents({})
     if count == 0:
         now = datetime.now(timezone.utc)
@@ -578,15 +576,12 @@ async def shutdown_db_client():
 # CORS
 # ---------------------------------------------------------------------------
 
-# Get allowed origins
 cors_origins_env = os.environ.get('CORS_ORIGINS', '*')
 if cors_origins_env == '*':
     cors_origins = ['*']
 else:
     cors_origins = [origin.strip() for origin in cors_origins_env.split(',')]
 
-# When using credentials, "*" is not allowed
-# Allow any origin by reflecting it back via regex
 app.add_middleware(
     CORSMiddleware,
     allow_origin_regex=".*",
@@ -595,12 +590,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 app.include_router(api_router)
-
-# Serve uploaded images at /api/uploads/* so it goes through the ingress
 app.mount("/api/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
-
 
 logging.basicConfig(
     level=logging.INFO,
