@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
@@ -19,16 +19,33 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 
 const PublicLayout = ({ children }) => (
-  <>
+  <div className="clean-layout-wrapper">
     <Header />
     {children}
     <Footer />
     <ScrollToTop />
-  </>
+  </div>
 );
 
 const AppRoutes = () => {
   const location = useLocation();
+  
+  // Scans the screen and instantly removes the hidden watermark if it loads
+  useEffect(() => {
+    const removeWatermark = () => {
+      const elements = document.querySelectorAll('*');
+      elements.forEach(el => {
+        if (el.textContent && el.textContent.includes('Made by Emergent')) {
+          el.style.setProperty('display', 'none', 'important');
+        }
+      });
+    };
+    removeWatermark();
+    const observer = new MutationObserver(removeWatermark);
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, [location]);
+
   const isAdminRoute = location.pathname.startsWith('/admin');
 
   if (isAdminRoute) {
@@ -65,7 +82,7 @@ const AppRoutes = () => {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App clean-root">
       <BrowserRouter>
         <AuthProvider>
           <AppRoutes />
