@@ -27,7 +27,12 @@ const Blog = () => {
     })();
   }, []);
 
-  const filteredPosts = posts.filter((post) => {
+  // Safe fallback wrapper to verify we are handling a true array
+  const postsArray = Array.isArray(posts) 
+    ? posts 
+    : (posts?.data || posts?.blogs || []);
+
+  const filteredPosts = postsArray.filter((post) => {
     const q = searchQuery.toLowerCase();
     const matchesSearch =
       !q || post.title.toLowerCase().includes(q) || post.excerpt.toLowerCase().includes(q);
@@ -35,7 +40,7 @@ const Blog = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const latestPost = posts[0];
+  const latestPost = postsArray[0];
   const otherPosts = filteredPosts.slice(1);
   const isDefaultView = searchQuery === '' && selectedCategory === 'All';
 
@@ -72,7 +77,7 @@ const Blog = () => {
               />
             </div>
             <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
+              {Array.isArray(categories) && categories.map((category) => (
                 <Button
                   key={category}
                   variant={selectedCategory === category ? 'default' : 'outline'}
@@ -125,7 +130,7 @@ const Blog = () => {
                             </span>
                             <span className="flex items-center gap-1 text-gray-600">
                               <Calendar className="w-4 h-4" />
-                              {new Date(latestPost.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              {latestPost.published_at && new Date(latestPost.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                             </span>
                           </div>
                           <h3 className="text-2xl font-bold text-blue-900 mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -191,7 +196,7 @@ const Blog = () => {
                             </span>
                             <span className="flex items-center gap-1 text-xs text-gray-600">
                               <Calendar className="w-3 h-3" />
-                              {new Date(post.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                              {post.published_at && new Date(post.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                             </span>
                           </div>
                           <h3 className="text-lg font-bold text-blue-900 mb-2 line-clamp-2" style={{ fontFamily: "'Playfair Display', serif" }}>
