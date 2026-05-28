@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Mail, MoreVertical, X } from 'lucide-react';
+import { Menu, X, ChevronDown, Phone, Mail } from 'lucide-react';
+import { Button } from './ui/button';
+import { useAuth } from '../contexts/AuthContext';
 
-useEffect(() => {
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const { user, logout } = useAuth();
+
+  useEffect(() => {
     const handleScroll = () => {
       // Check if the current screen width is mobile (less than 768px wide)
       const isMobile = window.innerWidth < 768;
@@ -11,7 +19,7 @@ useEffect(() => {
         // Force it to stay small/compact all the time on mobile screens
         setIsScrolled(true);
       } else {
-        // Keep your exact original hysteresis scrolling behavior on desktop
+        // Keep your exact original hysteresis scrolling behavior on desktop screens
         const y = window.scrollY;
         setIsScrolled((prev) => {
           if (prev && y < 30) return false;
@@ -21,7 +29,7 @@ useEffect(() => {
       }
     };
 
-    // Run the check immediately when the component mounts/loads
+    // Run the check immediately when the page loads
     handleScroll();
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -43,9 +51,8 @@ useEffect(() => {
     { name: 'About Us', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Industries', path: '/industries' },
-    { name: 'Why Choose Us', path: '/why-us' },
+    { name: 'Why Us', path: '/why-us' },
     { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
   ];
 
   return (
