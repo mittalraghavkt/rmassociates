@@ -12,19 +12,19 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Check if the current screen width is a mobile screen (less than 768px)
+      // Check if the screen is mobile (less than 768px wide)
       const isMobile = window.innerWidth < 768;
       
       if (isMobile) {
-        // Keep it permanently contracted/small on mobile devices
+        // Keep it contracted/compact ALL the time on mobile screens
         setIsScrolled(true);
       } else {
-        // Restore your original smooth contraction/expansion behavior on desktop screens
+        // Keep your exact original expand/contract behavior on desktop
         setIsScrolled(window.scrollY > 20);
       }
     };
 
-    // Run immediately on page mount
+    // Run the check immediately when the page loads
     handleScroll();
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -61,7 +61,7 @@ const Header = () => {
 
   return (
     <>
-      {/* Top micro-bar: Automatically hides on mobile screens to maintain compact spacing */}
+      {/* Top Bar */}
       <div className="hidden md:block bg-blue-950 text-white py-1.5 border-b border-blue-900 text-xs">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-6">
@@ -76,7 +76,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Main Navigation Header */}
+      {/* Main Header */}
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           isScrolled
@@ -87,7 +87,7 @@ const Header = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Firm Brand Identity Placement */}
+            {/* Logo & Brand */}
             <Link to="/" className="flex items-center space-x-2 md:space-x-3 group select-none">
               <CALogo />
               <div className="flex flex-col">
@@ -104,7 +104,7 @@ const Header = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation Links */}
+            {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-1">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
@@ -125,7 +125,7 @@ const Header = () => {
               })}
             </nav>
 
-            {/* Action Call buttons */}
+            {/* Actions */}
             <div className="hidden lg:flex items-center space-x-3">
               <Link to="/contact">
                 <Button className="bg-blue-900 hover:bg-green-700 text-white font-semibold shadow-sm transition-all duration-200 px-5">
@@ -139,7 +139,7 @@ const Header = () => {
               )}
             </div>
 
-            {/* Mobile Menu Icon Trigger */}
+            {/* Mobile Menu Toggle */}
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
@@ -151,7 +151,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu drawer overlay */}
+        {/* Mobile Navigation Menu */}
         {isOpen && (
           <div className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl animate-fadeIn">
             <div className="px-4 pt-3 pb-6 space-y-1.5 bg-white">
