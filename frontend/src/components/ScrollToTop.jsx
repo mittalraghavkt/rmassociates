@@ -7,11 +7,9 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show button after scrolling down 400px
       const currentScroll = window.scrollY;
       setVisible(currentScroll > 400);
 
-      // Calculate total scrollable height and current progress percentage
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
         const progress = (currentScroll / totalHeight) * 100;
@@ -28,11 +26,15 @@ const ScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // SVG Circle Parameters for a clean, uniform outline
   const radius = 24;
   const circumference = 2 * Math.PI * radius;
-  // Calculate the dash offset matching current progress
   const strokeDashoffset = circumference - (scrollProgress / 100) * circumference;
+
+  // Simple, solid conditional checker to prevent parsing bugs
+  let isCompleted = false;
+  if (scrollProgress >= 99) {
+    isCompleted = true;
+  }
 
   return (
     <button
@@ -49,11 +51,11 @@ const ScrollToTop = () => {
         height: '56px',
         borderRadius: '9999px',
         display: 'flex',
-        align-items: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
         zIndex: 100,
         cursor: 'pointer',
-        backgroundColor: '#1e3a8a', // Dark Navy Core
+        backgroundColor: '#1e3a8a',
         color: '#ffffff',
         border: 'none',
         outline: 'none',
@@ -61,12 +63,10 @@ const ScrollToTop = () => {
         boxShadow: '0 10px 25px -8px rgba(30, 58, 138, 0.45)'
       }}
     >
-      {/* Dynamic SVG Progress Ring */}
       <svg 
         className="absolute inset-0 w-full h-full -rotate-90"
         style={{ width: '56px', height: '56px', position: 'absolute' }}
       >
-        {/* Background track circle */}
         <circle
           cx="28"
           cy="28"
@@ -75,13 +75,12 @@ const ScrollToTop = () => {
           stroke="rgba(255, 255, 255, 0.2)"
           strokeWidth="3"
         />
-        {/* Dynamic active progress indicator */}
         <circle
           cx="28"
           cy="28"
           r={radius}
-          fill={scrollProgress >= 99 ? '#15803d' : 'transparent'} // Completely green fill on completion
-          stroke="#16a34a" // Smooth theme green border
+          fill={isCompleted ? '#15803d' : 'transparent'}
+          stroke="#16a34a"
           strokeWidth="3"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
@@ -90,7 +89,6 @@ const ScrollToTop = () => {
         />
       </svg>
 
-      {/* Centered Arrow Icon */}
       <ArrowUp className="w-5 h-5 relative z-10 pointer-events-none" />
     </button>
   );
