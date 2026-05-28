@@ -8,6 +8,17 @@ export const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+// CHANGED: Interceptor captures authorization strings to bypass strict cookie policies seamlessly
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
 export function formatApiErrorDetail(detail) {
   if (detail == null) return 'Something went wrong. Please try again.';
   if (typeof detail === 'string') return detail;
