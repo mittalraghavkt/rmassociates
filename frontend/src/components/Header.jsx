@@ -12,19 +12,19 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Check if the user is on a mobile device (screen width less than 768px)
+      // Check if the current screen width is a mobile screen (less than 768px)
       const isMobile = window.innerWidth < 768;
       
       if (isMobile) {
-        // Force the contracted (small) header state ALL the time on mobile screens
+        // Keep it permanently contracted/small on mobile devices
         setIsScrolled(true);
       } else {
-        // Keep dynamic expand/contract behavior ONLY for desktop screens
+        // Restore your original smooth contraction/expansion behavior on desktop screens
         setIsScrolled(window.scrollY > 20);
       }
     };
 
-    // Run the check immediately on mount/load
+    // Run immediately on page mount
     handleScroll();
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -36,7 +36,6 @@ const Header = () => {
     };
   }, []);
 
-  // Close mobile navigation panel when clicking on links or changing routes
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
@@ -62,7 +61,7 @@ const Header = () => {
 
   return (
     <>
-      {/* Top micro-bar containing direct contact links - Hidden on mobile screen views to ensure compact sizing */}
+      {/* Top micro-bar: Automatically hides on mobile screens to maintain compact spacing */}
       <div className="hidden md:block bg-blue-950 text-white py-1.5 border-b border-blue-900 text-xs">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-6">
@@ -77,7 +76,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Main Navigation Top Bar Header */}
+      {/* Main Navigation Header */}
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           isScrolled
@@ -88,12 +87,12 @@ const Header = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Branding Firm Label Layout */}
+            {/* Firm Brand Identity Placement */}
             <Link to="/" className="flex items-center space-x-2 md:space-x-3 group select-none">
               <CALogo />
               <div className="flex flex-col">
                 <span className={`font-bold text-blue-900 transition-all duration-300 tracking-tight leading-tight group-hover:text-green-700 ${
-                  isScrolled ? 'text-base md:text-lg' : 'text-md md:text-xl'
+                  isScrolled ? 'text-base md:text-lg' : 'text-lg md:text-xl'
                 }`}>
                   Raghav Mittal &amp; Associates
                 </span>
@@ -105,7 +104,7 @@ const Header = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation Links view items */}
+            {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center space-x-1">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
@@ -126,7 +125,7 @@ const Header = () => {
               })}
             </nav>
 
-            {/* Action Buttons */}
+            {/* Action Call buttons */}
             <div className="hidden lg:flex items-center space-x-3">
               <Link to="/contact">
                 <Button className="bg-blue-900 hover:bg-green-700 text-white font-semibold shadow-sm transition-all duration-200 px-5">
@@ -140,7 +139,7 @@ const Header = () => {
               )}
             </div>
 
-            {/* Mobile View Navigation Toggle Menu Trigger Icon Button */}
+            {/* Mobile Menu Icon Trigger */}
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
@@ -152,7 +151,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Slide-down Navigation Panel Backdrop overlay drawer list items */}
+        {/* Mobile Dropdown Menu drawer overlay */}
         {isOpen && (
           <div className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl animate-fadeIn">
             <div className="px-4 pt-3 pb-6 space-y-1.5 bg-white">
