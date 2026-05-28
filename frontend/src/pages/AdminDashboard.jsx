@@ -70,7 +70,7 @@ const AdminDashboard = () => {
       const { data } = await api.post('/admin/upload', fd, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      const fullUrl = data.url; // already a relative path like /api/uploads/...
+      const fullUrl = data.url;
       setForm((prev) => ({ ...prev, image: fullUrl }));
       toast({ title: 'Image uploaded' });
     } catch (err) {
@@ -87,7 +87,8 @@ const AdminDashboard = () => {
     setLoadingPosts(true);
     try {
       const { data } = await api.get('/blog');
-      setPosts(data);
+      // Added safety check for posts array
+      setPosts(Array.isArray(data) ? data : []);
     } catch (e) {
       toast({ title: 'Failed to load posts', description: formatApiErrorDetail(e.response?.data?.detail) });
     } finally {
@@ -99,7 +100,8 @@ const AdminDashboard = () => {
     setLoadingContacts(true);
     try {
       const { data } = await api.get('/admin/contacts');
-      setContacts(data);
+      // Added safety check for contacts array
+      setContacts(Array.isArray(data) ? data : []);
     } catch (e) {
       toast({ title: 'Failed to load contacts', description: formatApiErrorDetail(e.response?.data?.detail) });
     } finally {
@@ -112,7 +114,8 @@ const AdminDashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (tab === 'contacts' && contacts.length === 0) {
+    // Treat non-arrays as an empty check flag to fetch data safely
+    if (tab === 'contacts' && (!Array.isArray(contacts) || contacts.length === 0)) {
       loadContacts();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -175,7 +178,9 @@ const AdminDashboard = () => {
     if (!window.confirm('Delete this contact submission?')) return;
     try {
       await api.delete(`/admin/contacts/${id}`);
-      setContacts((prev) => prev.filter((c) => c.id !== id));
+      if (Array.isArray(contacts)) {
+        setContacts((prev) => prev.filter((c) => c.id !== id));
+      }
       toast({ title: 'Contact deleted' });
     } catch (e) {
       toast({ title: 'Delete failed', description: formatApiErrorDetail(e.response?.data?.detail) });
@@ -217,7 +222,7 @@ const AdminDashboard = () => {
               }`}
             >
               <FileText className="inline w-4 h-4 mr-2" />
-              Blog Posts ({posts.length})
+              Blog Posts ({Array.isArray(posts) ? posts.length : 0})
             </button>
             <button
               onClick={() => setTab('contacts')}
@@ -227,7 +232,7 @@ const AdminDashboard = () => {
               }`}
             >
               <Inbox className="inline w-4 h-4 mr-2" />
-              Contact Submissions ({contacts.length})
+              Contact Submissions ({Array.isArray(contacts) ? contacts.length : 0})
             </button>
           </div>
         </div>
@@ -245,7 +250,7 @@ const AdminDashboard = () => {
             </div>
             {loadingPosts ? (
               <p className="text-gray-600">Loading...</p>
-            ) : posts.length === 0 ? (
+            ) : (!Array.isArray(posts) || posts.length === 0) ? (
               <p className="text-gray-600">No posts yet. Create your first one!</p>
             ) : (
               <div className="grid gap-4">
@@ -258,7 +263,7 @@ const AdminDashboard = () => {
                             {p.category}
                           </span>
                           <span className="text-xs text-gray-500">
-                            {new Date(p.published_at).toLocaleDateString()}
+                            {p.published_at ? new Date(p.published_at).toLocaleDateString() : ''}
                           </span>
                         </div>
                         <h3 className="font-bold text-blue-900">{p.title}</h3>
@@ -296,7 +301,7 @@ const AdminDashboard = () => {
             <h2 className="text-2xl font-bold text-blue-900 mb-6">Contact Submissions</h2>
             {loadingContacts ? (
               <p className="text-gray-600">Loading...</p>
-            ) : contacts.length === 0 ? (
+            ) : (!Array.isArray(contacts) || contacts.length === 0) ? (
               <p className="text-gray-600">No contact submissions yet.</p>
             ) : (
               <div className="grid gap-4">
@@ -314,7 +319,7 @@ const AdminDashboard = () => {
                               {c.phone}
                             </a>
                             <span className="text-xs text-gray-500 ml-auto">
-                              {new Date(c.submitted_at).toLocaleString()}
+                              {c.submitted_at ? new Date(c.submitted_at).toLocaleString() : ''}
                             </span>
                           </div>
                           <h4 className="font-semibold text-gray-800 mb-1">{c.subject}</h4>
